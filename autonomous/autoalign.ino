@@ -1,4 +1,11 @@
-//note: everything in cm
+/*
+*
+* By Collin Wentzien
+* Updated 11/9/2021
+*
+* Note: everything in cm unless otherwise specified
+*
+*/
 
 const int leftPing = 9;
 const int leftEcho = 8;
