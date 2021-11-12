@@ -10,7 +10,19 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveSubsystem;
+
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.*;
+
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.JoystickConstants;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -20,8 +32,14 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
   private final DriveSubsystem m_drive = new DriveSubsystem();
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  private final IntakeSubsystem m_robotIntake = new IntakeSubsystem();
+
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  // The driver's controller
 
   static Joystick controller = new Joystick(DriveConstants.KControllerPort);
 
@@ -40,7 +58,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    new JoystickButton(controller, JoystickConstants.kA)
+      .whenHeld(new InstantCommand(() -> m_robotIntake.intakeBalls(10), m_robotIntake))
+      .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
   }
 
   public static double getContoller(int port) {
