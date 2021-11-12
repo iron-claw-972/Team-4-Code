@@ -9,16 +9,26 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ExampleSubsystem extends SubsystemBase {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  public ExampleSubsystem() {
-
+ // TalonSRX leftMotor = new TalonSRX(DriveConstants.kLeftMotorPort);
+  //TalonSRX RightMotor = new TalonSRX(DriveConstants.kRightMotorPort);
+  public DriveSubsystem() {
+    
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void arcadeDrive(double throttle, double turn){
+    leftMotor1.set(ControlMode.PercentOutput, leftPower);
+    rightMotor1.set(ControlMode.PercentOutput, rightPower);
+  }
+
 }
