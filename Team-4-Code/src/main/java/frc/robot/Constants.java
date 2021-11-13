@@ -34,6 +34,15 @@ public final class Constants {
 
     }
 
+    public static final class OuttakeConstants{
+        public static final int kOuttakeMotorPort = -1;
+        /* replace this with the actual port later*/
+
+        public static final int kControllerPort = 0;
+
+
+    }
+
     public static final class JoystickConstants{
         public static final int kA = 1;
     }
