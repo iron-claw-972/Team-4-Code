@@ -36,6 +36,8 @@ public final class Constants {
 
     public static final class JoystickConstants{
         public static final int kA = 1;
+        public static final int kLeftJoyAxis = 0;
+        public static final int kRightJoyAxis = 0;
     }
 
 }
