@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.*;
 
 
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.OuttakeConstants;
 
 
 public class OuttakeSubsystem extends OuttakeBase {

@@ -36,6 +36,8 @@ public class RobotContainer {
   private final DriveSubsystem m_drive = new DriveSubsystem();
 
   private final IntakeSubsystem m_robotIntake = new IntakeSubsystem();
+  private final OuttakeSubsystem m_robotOuttake = new OuttakeSubsystem();
+
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
@@ -61,6 +63,10 @@ public class RobotContainer {
     new JoystickButton(controller, JoystickConstants.kA)
       .whenHeld(new InstantCommand(() -> m_robotIntake.intakeBalls(10), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
+
+    new JoystickButton(controller, JoystickConstants.kY)
+      .whenHeld(new InstantCommand(() -> m_robotOuttake.outtakeBalls(10), m_robotOuttake))
+      .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
   }
 
   public static double getContoller(int port) {
