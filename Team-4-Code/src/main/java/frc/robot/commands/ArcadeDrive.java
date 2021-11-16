@@ -13,7 +13,6 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.JoystickConstants;
 
-
 /**
  * An example command that uses an example subsystem.
  */
@@ -36,7 +35,6 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     m_drive.arcadeDrive(
       RobotContainer.getController(JoystickConstants.kLeftJoyAxis), 
-      RobotContainer.getContoller(JoystickConstants.KRightJoyAxis));
-    
+      RobotContainer.getController(JoystickConstants.kRightJoyAxis));
   }
 }

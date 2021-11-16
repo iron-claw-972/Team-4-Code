@@ -14,11 +14,10 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.*;
-
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.JoystickConstants;
 
@@ -35,12 +34,14 @@ public class RobotContainer {
   private final DriveSubsystem m_drive = new DriveSubsystem();
 
   private final IntakeSubsystem m_robotIntake = new IntakeSubsystem();
+  private final OuttakeSubsystem m_robotOuttake = new OuttakeSubsystem();
+
 
   private final RunCommand m_autoCommand = new RunCommand(() -> m_drive.tankDrive(5,5), m_drive);
 
   // The driver's controller
 
-  static Joystick controller = new Joystick(DriveConstants.KControllerPort);
+  static Joystick controller = new Joystick(JoystickConstants.kControllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -60,9 +61,13 @@ public class RobotContainer {
     new JoystickButton(controller, JoystickConstants.kA)
       .whenHeld(new InstantCommand(() -> m_robotIntake.intakeBalls(10), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
+
+    new JoystickButton(controller, JoystickConstants.kY)
+      .whenHeld(new InstantCommand(() -> m_robotOuttake.outtakeBalls(10), m_robotOuttake))
+      .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
   }
 
-  public static double getContoller(int port) {
+  public static double getController(int port) {
     // get a joystick axis
     return controller.getRawAxis(port);
   }

@@ -11,25 +11,21 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.OuttakeConstants;
 
 
-public class IntakeSubsystem extends SubsystemBase {
-  /**
-   * Creates a new ExampleSubsystem.
-   */
+public class OuttakeSubsystem extends SubsystemBase {
+  TalonSRX motor1 = new TalonSRX(OuttakeConstants.kOuttakeMotorPort);
 
-  TalonSRX motor1 = new TalonSRX(IntakeConstants.kIntakeMotorPort);
-
-  public IntakeSubsystem() {
+  public OuttakeSubsystem() {
 
   }
 
-  public void intakeBalls(double power){
+  public void outtakeBalls(double power){
     motor1.set(ControlMode.PercentOutput, power);
   }
 
-  public void stopIntakeBalls(){
+  public void stopOuttakeBalls(){
     motor1.set(ControlMode.PercentOutput, 0);
   }
 

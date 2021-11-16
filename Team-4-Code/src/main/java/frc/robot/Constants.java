@@ -28,16 +28,21 @@ public final class Constants {
     public static final class IntakeConstants{
         public static final int kIntakeMotorPort = -1;
         /* replace this with the actual port later*/
+    }
 
-        public static final int kControllerPort = 0;
-
-
+    public static final class OuttakeConstants{
+        public static final int kOuttakeMotorPort = -1;
+        /* replace this with the actual port later*/
     }
 
     public static final class JoystickConstants{
+        public static final int kControllerPort = 0;
+
         public static final int kA = 1;
-        public static final int kLeftJoyAxis = 0;
-        public static final int kRightJoyAxis = 0;
+        public static final int kY = 2;
+
+        public static final int kLeftJoyAxis = 1;
+        public static final int kRightJoyAxis = 4;
     }
 
 }
