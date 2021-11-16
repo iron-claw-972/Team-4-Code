@@ -10,6 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.JoystickConstants;
 
 /**
  * An example command that uses an example subsystem.
@@ -32,8 +34,7 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     m_drive.arcadeDrive(
-      RobotContainer.getController(DriveConstants.kLeftJoyAxis), 
-      RobotContainer.getContoller(DriveConstants.KRightJoyAxis));
-    
+      RobotContainer.getController(JoystickConstants.kLeftJoyAxis), 
+      RobotContainer.getController(JoystickConstants.kRightJoyAxis));
   }
 }
