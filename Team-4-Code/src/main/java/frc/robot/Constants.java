@@ -51,6 +51,9 @@ public final class Constants {
         public static final int kA = 1;
         public static final int kB = 2;
         public static final int kY = 3;
+
+        public static final int kLeftJoyAxis = 1;
+        public static final int kRightJoyAxis = 4;
     }
 
 }

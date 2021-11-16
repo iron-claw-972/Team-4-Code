@@ -11,16 +11,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveSubsystem;
 
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.OuttakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.*;
-
-import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.JoystickConstants;
 
 
@@ -43,7 +40,7 @@ public class RobotContainer {
 
   // The driver's controller
 
-  static Joystick controller = new Joystick(DriveConstants.KControllerPort);
+  static Joystick controller = new Joystick(JoystickConstants.kControllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -73,7 +70,7 @@ public class RobotContainer {
       .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
   }
 
-  public static double getContoller(int port) {
+  public static double getController(int port) {
     // get a joystick axis
     return controller.getRawAxis(port);
   }
