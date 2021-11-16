@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Constants.OuttakeConstants;
 
 
-public class OuttakeSubsystem extends OuttakeBase {
+public class OuttakeSubsystem extends SubsystemBase {
   TalonSRX motor1 = new TalonSRX(OuttakeConstants.kOuttakeMotorPort);
 
   public OuttakeSubsystem() {
