@@ -39,7 +39,7 @@ public class RobotContainer {
   private final OuttakeSubsystem m_robotOuttake = new OuttakeSubsystem();
 
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final RunCommand m_autoCommand = new RunCommand(() -> m_drive.tankDrive(5,5), m_drive);
 
   // The driver's controller
 
