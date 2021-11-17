@@ -29,12 +29,13 @@ public class Align extends CommandBase {
         }
     }
 
+    @Override
     public boolean isFinished() {
         return ((int)(dataReceived[2]) == 1);
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_drive.tankDrive((int)(dataReceived[0]), (int)(dataReceived[1]));
+        m_drive.tankDrive(0, 0);
     }
 }
