@@ -10,7 +10,9 @@ import frc.robot.subsystems.DriveSubsystem;
 public class Align extends CommandBase {
     
     private final I2C arduino = new I2C(Port.kOnboard, ArduinoConstants.port);
-    private final String data = "align";
+
+    //three bytes (-125 to 127), one for left motor power, one for right, one for finished alignment
+    //could probably use less
     private final byte[] dataReceived = new byte[3];
     private final DriveSubsystem m_drive;
 
@@ -20,12 +22,23 @@ public class Align extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        //send "align" on wire to start align process
+        boolean success = arduino.transaction("align".getBytes(), "align".getBytes().length, dataReceived, 3);
+        if (success) {
+            System.out.println("Initialized, Transfer successful");
+        } else {
+            System.out.println("Initialized, Transfer NOT successful");
+        }
+    }
+
+    @Override
     public void execute() {
-        boolean success = arduino.transaction(data.getBytes(), data.getBytes().length, dataReceived, 3);
+        boolean success = arduino.read(ArduinoConstants.port, 3, dataReceived);
         if (success) {
             m_drive.tankDrive((int)(dataReceived[0]), (int)(dataReceived[1]));
         } else {
-            System.out.println("Arduino Trasfer Aborted");
+            System.out.println("Arduino Transfer Aborted");
         }
     }
 
