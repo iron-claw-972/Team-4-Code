@@ -57,6 +57,6 @@ public final class Constants {
     public static final class ArdConstants {
         public static final int port = -1; //TODO: set port
         public static final byte[] startSend = "align".getBytes();
-		public static final int numData = 2;
+		public static final int numData = 2; //two bytes (-125 to 127), one for left motor power, one for right
     }
 }

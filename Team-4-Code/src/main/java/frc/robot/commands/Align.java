@@ -12,8 +12,6 @@ public class Align extends CommandBase {
     // how is ardunio spelled
     private final I2C arduino = new I2C(Port.kOnboard, ArdConstants.port);
 
-    //three bytes (-125 to 127), one for left motor power, one for right, one for finished alignment
-    //could probably use less
     private final byte[] dataReceived = new byte[ArdConstants.numData];
 
     private final DriveSubsystem m_drive;
