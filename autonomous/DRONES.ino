@@ -6,7 +6,7 @@
  * by collin w
  * updated 11/12/2021
  * 
- * note: everything in inches :(
+ * note: everything in inches :( cringe
  * for second robotics team (972)
  * 
  */

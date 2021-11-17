@@ -18,12 +18,10 @@ package frc.robot;
  */
 public final class Constants {
 
-
     public final class DriveConstants {
       public static final int kLeftMotorPort = 0;
       public static final int kRightMotorPort = 0;
     }
-
 
     public static final class IntakeConstants{
         public static final int kIntakeMotorPort = -1;
@@ -56,4 +54,7 @@ public final class Constants {
         public static final int kRightJoyAxis = 4;
     }
 
+    public static final class ArduinoConstants {
+        public static final int port = -1; //TODO: set port
+    }
 }
