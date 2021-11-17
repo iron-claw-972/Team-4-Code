@@ -60,15 +60,15 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(controller, JoystickConstants.kA)
-      .whenHeld(new InstantCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeSpeed), m_robotIntake))
+      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
     new JoystickButton(controller, JoystickConstants.kB)
-      .whenHeld(new InstantCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeDislodgeSpeed), m_robotIntake))
+      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeDislodgeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
     new JoystickButton(controller, JoystickConstants.kY)
-      .whenHeld(new InstantCommand(() -> m_robotOuttake.outtakeBalls(OuttakeConstants.outtakeSpeed), m_robotOuttake))
+      .whenHeld(new RunCommand(() -> m_robotOuttake.outtakeBalls(OuttakeConstants.outtakeSpeed), m_robotOuttake))
       .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
   }
 
