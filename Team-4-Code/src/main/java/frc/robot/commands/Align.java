@@ -24,7 +24,7 @@ public class Align extends CommandBase {
     @Override
     public void initialize() {
         //send "align" on wire to start align process
-        boolean success = arduino.transaction(ArdConstants.startSend, ArdConstants.startSend.length, dataReceived, ArdConstants.numData);
+        boolean success = arduino.transaction(ArdConstants.startSend, ArdConstants.startSend.length, dataReceived, dataReceived.length);
         if (success) {
             System.out.println("Initialized, Transfer successful");
         } else {
@@ -34,7 +34,7 @@ public class Align extends CommandBase {
 
     @Override
     public void execute() {
-        boolean success = arduino.read(ArdConstants.port, ArdConstants.numData, dataReceived);
+        boolean success = arduino.readOnly(dataReceived, dataReceived.length);
         if (success) {
             m_drive.tankDrive((int)(dataReceived[0]), (int)(dataReceived[1]));
         } else {
