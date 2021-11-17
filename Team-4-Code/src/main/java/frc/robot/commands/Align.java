@@ -35,5 +35,6 @@ public class Align extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        m_drive.tankDrive((int)(dataReceived[0]), (int)(dataReceived[1]));
     }
 }
