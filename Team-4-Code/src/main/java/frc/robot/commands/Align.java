@@ -4,16 +4,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ArduinoConstants;
+import frc.robot.Constants.ArdConstants;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Align extends CommandBase {
     
-    private final I2C arduino = new I2C(Port.kOnboard, ArduinoConstants.port);
+    // how is ardunio spelled
+    private final I2C arduino = new I2C(Port.kOnboard, ArdConstants.port);
 
     //three bytes (-125 to 127), one for left motor power, one for right, one for finished alignment
     //could probably use less
-    private final byte[] dataReceived = new byte[3];
+    private final byte[] dataReceived = new byte[ArdConstants.numData];
+
     private final DriveSubsystem m_drive;
 
     public Align(DriveSubsystem drive) {
@@ -24,7 +26,7 @@ public class Align extends CommandBase {
     @Override
     public void initialize() {
         //send "align" on wire to start align process
-        boolean success = arduino.transaction("align".getBytes(), "align".getBytes().length, dataReceived, 3);
+        boolean success = arduino.transaction(ArdConstants.startSend, ArdConstants.startSend.length, dataReceived, ArdConstants.numData);
         if (success) {
             System.out.println("Initialized, Transfer successful");
         } else {
@@ -34,7 +36,7 @@ public class Align extends CommandBase {
 
     @Override
     public void execute() {
-        boolean success = arduino.read(ArduinoConstants.port, 3, dataReceived);
+        boolean success = arduino.read(ArdConstants.port, ArdConstants.numData, dataReceived);
         if (success) {
             m_drive.tankDrive((int)(dataReceived[0]), (int)(dataReceived[1]));
         } else {
@@ -44,7 +46,7 @@ public class Align extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return ((int)(dataReceived[2]) == 1);
+        return ((int)(dataReceived[0]) == 0 && (int)(dataReceived[1]) == 0 );
     }
 
     @Override

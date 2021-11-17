@@ -54,7 +54,9 @@ public final class Constants {
         public static final int kRightJoyAxis = 4;
     }
 
-    public static final class ArduinoConstants {
+    public static final class ArdConstants {
         public static final int port = -1; //TODO: set port
+        public static final byte[] startSend = "align".getBytes();
+		public static final int numData = 2;
     }
 }
