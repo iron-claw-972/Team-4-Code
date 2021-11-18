@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -26,6 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
   }
 
+  public void resetEncoders() {
+    leftMotor.getSensorCollection().setQuadraturePosition(0, 100);
+  }
+
   public void tankDrive(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
     rightMotor.set(ControlMode.PercentOutput, rightPower);
@@ -36,8 +41,9 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotor.set(ControlMode.PercentOutput, throttle - turn);
   }
 
-  public void PIDDrive(double setpoint) {
-    leftMotor.set(ControlMode.PercentOutput, pid.calculate());
-    rightMotor.set(ControlMode.PercentOutput, pid.calculate());
+  public void PIDDrive(int setpoint) {
+    int pv = leftMotor.getSensorCollection().getQuadraturePosition();
+    leftMotor.set(ControlMode.PercentOutput, pid.calculate(pv, setpoint));
+    rightMotor.set(ControlMode.PercentOutput, pid.calculate(pv, setpoint));
   }
 }

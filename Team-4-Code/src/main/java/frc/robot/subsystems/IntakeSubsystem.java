@@ -15,26 +15,14 @@ import frc.robot.Constants.IntakeConstants;
 
 
 public class IntakeSubsystem extends SubsystemBase {
-  /**
-   * Creates a new ExampleSubsystem.
-   */
 
-  TalonSRX motor1 = new TalonSRX(IntakeConstants.kIntakeMotorPort);
-
-  public IntakeSubsystem() {
-
-  }
+  TalonSRX intakeMotor = new TalonSRX(IntakeConstants.kIntakeMotorPort);
 
   public void intakeBalls(double power){
-    motor1.set(ControlMode.PercentOutput, power);
+    intakeMotor.set(ControlMode.PercentOutput, power);
   }
 
   public void stopIntakeBalls(){
-    motor1.set(ControlMode.PercentOutput, 0);
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+    intakeMotor.set(ControlMode.PercentOutput, 0);
   }
 }

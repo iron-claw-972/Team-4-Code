@@ -13,9 +13,9 @@ import frc.robot.subsystems.DriveSubsystem;
 public class PIDDrive extends CommandBase {
   
   private final DriveSubsystem m_drive;
-  private final double setpoint;
+  private final int setpoint;
 
-  public PIDDrive(DriveSubsystem subsystem, double goal) {
+  public PIDDrive(DriveSubsystem subsystem, int goal) {
     m_drive = subsystem;
     setpoint = goal;
     addRequirements(m_drive);
