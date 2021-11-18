@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -18,14 +19,25 @@ public class DriveSubsystem extends SubsystemBase {
 
   TalonSRX rightMotor = new TalonSRX(DriveConstants.kRightMotorPort);
   TalonSRX leftMotor = new TalonSRX(DriveConstants.kLeftMotorPort);
+  
+  private PIDController pid = new PIDController(1, 0, 0);
+
+  public DriveSubsystem() {
+    leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
+  }
 
   public void tankDrive(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
     rightMotor.set(ControlMode.PercentOutput, rightPower);
   }
+
   public void arcadeDrive(double throttle, double turn) {
     leftMotor.set(ControlMode.PercentOutput, throttle + turn);
     rightMotor.set(ControlMode.PercentOutput, throttle - turn);
   }
 
+  public void PIDDrive(double setpoint) {
+    leftMotor.set(ControlMode.PercentOutput, pid.calculate());
+    rightMotor.set(ControlMode.PercentOutput, pid.calculate());
+  }
 }

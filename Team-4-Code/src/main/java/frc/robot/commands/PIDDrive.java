@@ -9,23 +9,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.RobotContainer;
-import frc.robot.Constants.JoystickConstants;
 
-public class ArcadeDrive extends CommandBase {
+public class PIDDrive extends CommandBase {
   
   private final DriveSubsystem m_drive;
+  private final double setpoint;
 
-  public ArcadeDrive(DriveSubsystem subsystem) {
+  public PIDDrive(DriveSubsystem subsystem, double goal) {
     m_drive = subsystem;
+    setpoint = goal;
     addRequirements(m_drive);
+  }
+
+  @Override
+  public void initialize() {
+    m_drive.resetEncoders();    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drive.arcadeDrive(
-      RobotContainer.getController(JoystickConstants.kLeftJoyAxis), 
-      RobotContainer.getController(JoystickConstants.kRightJoyAxis));
+    m_drive.PIDDrive(setpoint);
   }
 }
