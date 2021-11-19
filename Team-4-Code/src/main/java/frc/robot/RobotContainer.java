@@ -13,14 +13,15 @@ import frc.robot.subsystems.DriveSubsystem;
 
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.OuttakeSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.Constants.AutonoumousConst;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.OuttakeConstants;
+import frc.robot.commands.Align;
+import frc.robot.commands.PIDDrive;
 
 
 /**
@@ -38,15 +39,20 @@ public class RobotContainer {
   private final OuttakeSubsystem m_robotOuttake = new OuttakeSubsystem();
 
 
-  private final RunCommand m_autoCommand = new RunCommand(() -> m_drive.tankDrive(5,5), m_drive);
+  private final SequentialCommandGroup m_autoCommand = new SequentialCommandGroup(
+      //drives forward a certain distance
+      new PIDDrive(m_drive, AutonoumousConst.distToTable),
+      //turns for a certain time (doesn't neeed to be accurate bc of later align)
+      new RunCommand(() -> m_drive.tankDrive(1,-1), m_drive).withTimeout(AutonoumousConst.distToTable),
+      //align with wall
+      new Align(m_drive),
+      //outtake balls
+      new RunCommand(() -> m_robotOuttake.outtakeBalls(OuttakeConstants.outtakeSpeed), m_robotOuttake)
+      ); 
 
   // The driver's controller
-
   static Joystick controller = new Joystick(JoystickConstants.kControllerPort);
 
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();

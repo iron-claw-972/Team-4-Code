@@ -59,4 +59,9 @@ public final class Constants {
         public static final byte[] startSend = "align".getBytes();
 		public static final int numData = 2; //two bytes (-125 to 127), one for left motor power, one for right
     }
+
+    public static final class AutonoumousConst {
+        public static final int distToTable = 10;
+        public static final int turningTime = 10;
+    }
 }
