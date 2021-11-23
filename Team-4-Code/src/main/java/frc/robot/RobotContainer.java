@@ -16,12 +16,13 @@ import frc.robot.subsystems.OuttakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Constants.kAutonoumous;
+import frc.robot.Constants.kAuto;
 import frc.robot.Constants.kIntake;
 import frc.robot.Constants.kJoystick;
 import frc.robot.Constants.kOuttake;
 import frc.robot.commands.Align;
 import frc.robot.commands.PIDDrive;
+import frc.robot.commands.PIDTurn;
 
 
 /**
@@ -41,9 +42,9 @@ public class RobotContainer {
 
   private final SequentialCommandGroup m_autoCommand = new SequentialCommandGroup(
       //drives forward a certain distance
-      new PIDDrive(m_drive, kAutonoumous.distToTable),
+      new PIDDrive(m_drive, kAuto.distToTable),
       //turns for a certain time (doesn't neeed to be accurate bc of later align)
-      new RunCommand(() -> m_drive.tankDrive(1,-1), m_drive).withTimeout(kAutonoumous.distToTable),
+      new PIDTurn(m_drive, 90),
       //align with wall
       new Align(m_drive),
       //outtake balls

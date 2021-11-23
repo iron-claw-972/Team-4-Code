@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.kDrive;
 
@@ -19,8 +22,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   TalonSRX rightMotor = new TalonSRX(kDrive.kRightMotorPort);
   TalonSRX leftMotor = new TalonSRX(kDrive.kLeftMotorPort);
+
+  Gyro gyro = new ADXRS450_Gyro(SPI.Port.kMXP);
   
-  private PIDController pid = new PIDController(1, 0, 0);
+  PIDController drivePID = new PIDController(1, 0, 0);
+  PIDController turnPID = new PIDController(1, 0, 0);
 
   public DriveSubsystem() {
     leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
@@ -41,8 +47,13 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void PIDDrive(int setpoint) {
-    int pv = leftMotor.getSensorCollection().getQuadraturePosition();
-    leftMotor.set(ControlMode.PercentOutput, pid.calculate(pv, setpoint));
-    rightMotor.set(ControlMode.PercentOutput, pid.calculate(pv, setpoint));
-  }  
+    int pv = (leftMotor.getSensorCollection().getQuadraturePosition() / kDrive.COUNTS_PER_REV);
+    leftMotor.set(ControlMode.PercentOutput, drivePID.calculate(pv, setpoint));
+    rightMotor.set(ControlMode.PercentOutput, drivePID.calculate(pv, setpoint));
+  }
+
+  public void PIDTurn(int setpoint) {
+    leftMotor.set(ControlMode.PercentOutput, turnPID.calculate(gyro.getAngle(), setpoint));
+    rightMotor.set(ControlMode.PercentOutput, turnPID.calculate(gyro.getAngle(), setpoint));
+  }
 }

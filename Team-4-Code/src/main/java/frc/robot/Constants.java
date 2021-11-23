@@ -59,8 +59,7 @@ public final class Constants {
 		public static final int numData = 2; //two bytes (-125 to 127), one for left motor power, one for right
     }
 
-    public static final class kAutonoumous {
-        public static final int distToTable = 10;
-        public static final int turningTime = 10;
+    public static final class kAuto {
+        public static final int distToTable = (int)((105 /*Distance to table (in)*/)  / ((4 /*Colson performa wheel diameter (in)*/) * Math.PI));   //in motor rotations
     }
 }
