@@ -16,10 +16,10 @@ import frc.robot.subsystems.OuttakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Constants.AutonoumousConst;
-import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.JoystickConstants;
-import frc.robot.Constants.OuttakeConstants;
+import frc.robot.Constants.kAutonoumous;
+import frc.robot.Constants.kIntake;
+import frc.robot.Constants.kJoystick;
+import frc.robot.Constants.kOuttake;
 import frc.robot.commands.Align;
 import frc.robot.commands.PIDDrive;
 
@@ -41,17 +41,17 @@ public class RobotContainer {
 
   private final SequentialCommandGroup m_autoCommand = new SequentialCommandGroup(
       //drives forward a certain distance
-      new PIDDrive(m_drive, AutonoumousConst.distToTable),
+      new PIDDrive(m_drive, kAutonoumous.distToTable),
       //turns for a certain time (doesn't neeed to be accurate bc of later align)
-      new RunCommand(() -> m_drive.tankDrive(1,-1), m_drive).withTimeout(AutonoumousConst.distToTable),
+      new RunCommand(() -> m_drive.tankDrive(1,-1), m_drive).withTimeout(kAutonoumous.distToTable),
       //align with wall
       new Align(m_drive),
       //outtake balls
-      new RunCommand(() -> m_robotOuttake.outtakeBalls(OuttakeConstants.outtakeSpeed), m_robotOuttake)
+      new RunCommand(() -> m_robotOuttake.outtakeBalls(kOuttake.outtakeSpeed), m_robotOuttake)
       ); 
 
   // The driver's controller
-  static Joystick controller = new Joystick(JoystickConstants.kControllerPort);
+  static Joystick controller = new Joystick(kJoystick.kControllerPort);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -65,16 +65,16 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(controller, JoystickConstants.kA)
-      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeSpeed), m_robotIntake))
+    new JoystickButton(controller, kJoystick.kA)
+      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(kIntake.intakeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
-    new JoystickButton(controller, JoystickConstants.kB)
-      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(IntakeConstants.intakeDislodgeSpeed), m_robotIntake))
+    new JoystickButton(controller, kJoystick.kB)
+      .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(kIntake.intakeDislodgeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
-    new JoystickButton(controller, JoystickConstants.kY)
-      .whenHeld(new RunCommand(() -> m_robotOuttake.outtakeBalls(OuttakeConstants.outtakeSpeed), m_robotOuttake))
+    new JoystickButton(controller, kJoystick.kY)
+      .whenHeld(new RunCommand(() -> m_robotOuttake.outtakeBalls(kOuttake.outtakeSpeed), m_robotOuttake))
       .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
   }
 

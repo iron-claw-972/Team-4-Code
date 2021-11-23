@@ -8,9 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.kDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -18,8 +17,8 @@ import com.ctre.phoenix.motorcontrol.can.*;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  TalonSRX rightMotor = new TalonSRX(DriveConstants.kRightMotorPort);
-  TalonSRX leftMotor = new TalonSRX(DriveConstants.kLeftMotorPort);
+  TalonSRX rightMotor = new TalonSRX(kDrive.kRightMotorPort);
+  TalonSRX leftMotor = new TalonSRX(kDrive.kLeftMotorPort);
   
   private PIDController pid = new PIDController(1, 0, 0);
 

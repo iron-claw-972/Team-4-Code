@@ -4,15 +4,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ArdConstants;
+import frc.robot.Constants.kArdunio;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Align extends CommandBase {
     
     // how is ardunio spelled
-    private final I2C arduino = new I2C(Port.kOnboard, ArdConstants.port);
+    private final I2C arduino = new I2C(Port.kOnboard, kArdunio.port);
 
-    private final byte[] dataReceived = new byte[ArdConstants.numData];
+    private final byte[] dataReceived = new byte[kArdunio.numData];
 
     private final DriveSubsystem m_drive;
 
@@ -24,7 +24,7 @@ public class Align extends CommandBase {
     @Override
     public void initialize() {
         //send "align" on wire to start align process
-        boolean success = arduino.transaction(ArdConstants.startSend, ArdConstants.startSend.length, dataReceived, dataReceived.length);
+        boolean success = arduino.transaction(kArdunio.startSend, kArdunio.startSend.length, dataReceived, dataReceived.length);
         if (success) {
             System.out.println("Initialized, Transfer successful");
         } else {

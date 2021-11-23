@@ -11,11 +11,11 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants.OuttakeConstants;
+import frc.robot.Constants.kOuttake;
 
 
 public class OuttakeSubsystem extends SubsystemBase {
-  TalonSRX motor1 = new TalonSRX(OuttakeConstants.kOuttakeMotorPort);
+  TalonSRX motor1 = new TalonSRX(kOuttake.kOuttakeMotorPort);
 
   public OuttakeSubsystem() {
 

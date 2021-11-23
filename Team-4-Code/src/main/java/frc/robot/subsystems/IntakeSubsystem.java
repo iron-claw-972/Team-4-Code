@@ -11,12 +11,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.kIntake;
 
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  TalonSRX intakeMotor = new TalonSRX(IntakeConstants.kIntakeMotorPort);
+  TalonSRX intakeMotor = new TalonSRX(kIntake.kIntakeMotorPort);
 
   public void intakeBalls(double power){
     intakeMotor.set(ControlMode.PercentOutput, power);

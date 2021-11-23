@@ -18,12 +18,13 @@ package frc.robot;
  */
 public final class Constants {
 
-    public final class DriveConstants {
+    public final class kDrive {
       public static final int kLeftMotorPort = 0;
       public static final int kRightMotorPort = 0;
+      public static final int COUNTS_PER_REV = 2048;
     }
 
-    public static final class IntakeConstants{
+    public static final class kIntake{
         public static final int kIntakeMotorPort = -1;
         /* replace this with the actual port later*/
 
@@ -32,11 +33,9 @@ public final class Constants {
 
         public static final int intakeDislodgeSpeed = -2;
         /* change this to actual speed later */
-
-
     }
 
-    public static final class OuttakeConstants{
+    public static final class kOuttake{
         public static final int kOuttakeMotorPort = -1;
         /* replace this with the actual port later*/
         
@@ -44,7 +43,7 @@ public final class Constants {
         /* change this to actual speed later */
     }
 
-    public static final class JoystickConstants{
+    public static final class kJoystick{
         public static final int kControllerPort = 0;
         public static final int kA = 1;
         public static final int kB = 2;
@@ -54,13 +53,13 @@ public final class Constants {
         public static final int kRightJoyAxis = 4;
     }
 
-    public static final class ArdConstants {
+    public static final class kArdunio {
         public static final int port = -1; //TODO: set port
         public static final byte[] startSend = "align".getBytes();
 		public static final int numData = 2; //two bytes (-125 to 127), one for left motor power, one for right
     }
 
-    public static final class AutonoumousConst {
+    public static final class kAutonoumous {
         public static final int distToTable = 10;
         public static final int turningTime = 10;
     }
