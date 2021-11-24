@@ -60,6 +60,9 @@ public final class Constants {
     }
 
     public static final class kAuto {
-        public static final int distToTable = (int)((105 /*Distance to table (in)*/)  / ((4 /*Colson performa wheel diameter (in)*/) * Math.PI));   //in motor rotations
+        public static final int distToTable = (int)(
+            ((105 /*Distance to table (in)*/)  / 
+            ((4 /*Colson performa wheel diameter (in)*/) * Math.PI))
+            * (62 / 8.0 /* Approximate Gearbox Ratio*/)); //final number in rotations of the motor
     }
 }
