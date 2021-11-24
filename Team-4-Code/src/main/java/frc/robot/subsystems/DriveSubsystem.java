@@ -44,6 +44,10 @@ public class DriveSubsystem extends SubsystemBase {
     return (navX.getVelocityX() + navX.getVelocityX()) > 0.5;
   }
 
+  public void calibrate() {
+    navX.calibrate();
+  }
+
   public void tankDrive(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
     rightMotor.set(ControlMode.PercentOutput, rightPower);

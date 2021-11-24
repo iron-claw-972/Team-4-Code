@@ -68,17 +68,25 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //A to intake balls
     new JoystickButton(controller, kJoystick.kA)
       .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(kIntake.intakeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
+    //B to disloge balls from intake
     new JoystickButton(controller, kJoystick.kB)
       .whenHeld(new RunCommand(() -> m_robotIntake.intakeBalls(kIntake.intakeDislodgeSpeed), m_robotIntake))
       .whenReleased(new InstantCommand(m_robotIntake::stopIntakeBalls, m_robotIntake));
 
+    //Y to outtake balls
     new JoystickButton(controller, kJoystick.kY)
       .whenHeld(new RunCommand(() -> m_robotOuttake.outtakeBalls(kOuttake.outtakeSpeed), m_robotOuttake))
       .whenReleased(new InstantCommand(m_robotOuttake::stopOuttakeBalls, m_robotOuttake));
+
+    //Y and B at the same time to calibrate navX
+    new JoystickButton(controller, kJoystick.kY)
+      .and(new JoystickButton(controller, kJoystick.kB))
+      .whenActive(new RunCommand( m_drive::calibrate, m_drive ));
   }
 
   public static double getController(int port) {
