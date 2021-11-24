@@ -23,7 +23,7 @@ public class PIDTurn extends CommandBase {
 
   @Override
   public void initialize() {
-    m_drive.resetEncoders();    
+    m_drive.resetGyro();    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
