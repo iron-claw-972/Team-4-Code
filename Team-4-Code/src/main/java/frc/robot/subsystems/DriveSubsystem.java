@@ -40,6 +40,10 @@ public class DriveSubsystem extends SubsystemBase {
     navX.reset();
   }
 
+  public boolean isMoving() {
+    return (navX.getVelocityX() + navX.getVelocityX()) > 0.5;
+  }
+
   public void tankDrive(double leftPower, double rightPower) {
     leftMotor.set(ControlMode.PercentOutput, leftPower);
     rightMotor.set(ControlMode.PercentOutput, rightPower);

@@ -23,6 +23,7 @@ import frc.robot.Constants.kOuttake;
 import frc.robot.commands.Align;
 import frc.robot.commands.PIDDrive;
 import frc.robot.commands.PIDTurn;
+import frc.robot.commands.RunIntoWall;
 
 
 /**
@@ -43,10 +44,11 @@ public class RobotContainer {
   private final SequentialCommandGroup m_autoCommand = new SequentialCommandGroup(
       //drives forward a certain distance
       new PIDDrive(m_drive, kAuto.distToTable),
-      //turns for a certain time (doesn't neeed to be accurate bc of later align)
+      //turns 90 degrees
       new PIDTurn(m_drive, 90),
-      //align with wall
-      new Align(m_drive),
+      //align with wall (until this is proven to work will just run into wall)
+      //new Align(m_drive),
+      new RunIntoWall(m_drive, 5),
       //outtake balls
       new RunCommand(() -> m_robotOuttake.outtakeBalls(kOuttake.outtakeSpeed), m_robotOuttake)
       ); 
