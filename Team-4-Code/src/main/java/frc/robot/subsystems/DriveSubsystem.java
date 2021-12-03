@@ -72,4 +72,8 @@ public class DriveSubsystem extends SubsystemBase {
   public double getRotations() {
     return (leftMotor.getSensorCollection().getQuadraturePosition() / kDrive.COUNTS_PER_REV);
   }
+
+  public double getDegrees() {
+    return navX.getAngle();
+  }
 }

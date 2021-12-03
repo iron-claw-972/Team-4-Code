@@ -31,4 +31,9 @@ public class PIDTurn extends CommandBase {
   public void execute() {
     m_drive.PIDTurn(setpoint);
   }
+
+  @Override
+  public boolean isFinished() {
+    return (m_drive.getDegrees() < setpoint + 5) && (m_drive.getDegrees() > setpoint - 5);
+  }
 }
