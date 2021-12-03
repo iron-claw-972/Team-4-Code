@@ -68,4 +68,8 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor.set(ControlMode.PercentOutput, turnPID.calculate(navX.getAngle(), setpoint));
     rightMotor.set(ControlMode.PercentOutput, turnPID.calculate(navX.getAngle(), setpoint));
   }
+
+  public double getRotations() {
+    return (leftMotor.getSensorCollection().getQuadraturePosition() / kDrive.COUNTS_PER_REV);
+  }
 }

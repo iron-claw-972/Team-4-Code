@@ -31,4 +31,9 @@ public class PIDDrive extends CommandBase {
   public void execute() {
     m_drive.PIDDrive(setpoint);
   }
+
+  @Override
+  public boolean isFinished() {
+    return m_drive.getRotations() == setpoint;
+  }
 }
