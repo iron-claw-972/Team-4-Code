@@ -34,6 +34,6 @@ public class PIDDrive extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return m_drive.getRotations() == setpoint;
+    return (m_drive.getRotations() < setpoint + 1) && (m_drive.getRotations() > setpoint - 1);
   }
 }
